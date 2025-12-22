@@ -60,7 +60,7 @@ This provides a new “third modality” of interaction.
 ### **Videos**
 
 <video controls width="100%">
-  <source src="/demo-video.mp4" type="video/mp4">
+  <source src="/presentation.mp4" type="video/mp4">
 </video>
 
 ---
