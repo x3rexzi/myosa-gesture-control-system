@@ -2,10 +2,10 @@
 publishDate: 2025-12-11
 title: Gesture-Based Automation Hub
 excerpt: A touchless 3-channel home automation system powered by APDS9960 gestures.
-image: cover.jpg
+image: demo1.jpg
 tags:
-  - gesture-control
   - myosa
+  - gesture-control
   - automation
   - embedded-system
 ---
@@ -15,29 +15,25 @@ tags:
 ---
 
 ## Acknowledgements
-This project is a part of the MYOSA hardware challenge. Special thanks to the organizers for providing the development kit, guidance, and motivation to explore gesture-based control systems.
+
+This project has been developed as part of the **MYOSA Hardware Challenge**.  
+I would like to thank the MYOSA team for providing the hardware kit, clear guidelines, and an opportunity to explore gesture-based automation systems.
 
 ---
 
 ## Overview
 
-This project demonstrates a **touchless gesture-controlled automation hub** that eliminates the need for physical switches or cloud-based voice assistants.  
-Using the **APDS9960 gesture sensor**, a **microcontroller**, **OLED display**, and a **3-channel relay module**, the system converts simple hand movements into direct electrical control signals.
+The **Gesture-Based Automation Hub** is a touchless control system designed to operate multiple electrical appliances using simple hand gestures.
 
-### **Problem**
-Traditional automation relies on:
-- Mobile apps (Wi-Fi dependency)  
-- Physical switches (non-hygienic)  
-- Voice assistants (privacy concerns)
+Unlike conventional home automation systems that rely on:
+- Internet connectivity  
+- Mobile applications  
+- Physical switches  
+- Voice assistants  
 
-### **Solution**
-A fast, private, offline alternative:
-- No internet  
-- No physical touch  
-- No voice commands  
-- Works entirely on local hardware logic  
+this system works **completely offline** and focuses on **privacy, hygiene, and instant response**.
 
-This provides a new “third modality” of interaction.
+Using an **APDS9960 gesture sensor**, a **microcontroller**, an **OLED display**, and a **3-channel relay module**, the system converts air gestures into direct electrical control commands without any cloud dependency.
 
 ---
 
@@ -47,80 +43,97 @@ This provides a new “third modality” of interaction.
 
 <p align="center">
   <img src="/demo1.jpg" width="800"><br/>
-  <i>Gesture detection and channel selection</i>
+  <i>Gesture detection and channel selection using APDS9960</i>
 </p>
 
 <p align="center">
   <img src="/demo2.jpg" width="800"><br/>
-  <i>OLED feedback showing device states</i>
+  <i>OLED feedback showing active channel and device states</i>
 </p>
 
 ---
 
 ### **Videos**
 
-<video controls width="100%">
-  <source src="/presentation.mp4" type="video/mp4">
-</video>
+📽️ **Project Presentation Video**  
+👉 [Click to view presentation video](presentation.mp4)
+
+📽️ **Live Demonstration Video**  
+👉 [Click to view system demonstration](demonstration.mp4)
+
+*(Videos are uploaded locally as per MYOSA submission rules.)*
 
 ---
 
 ## Features (Detailed)
 
 ### **1. Multi-Device Gesture Control**
-The system supports **3 independent appliances** using a 3-channel relay module.  
-Each appliance can be turned ON/OFF using only hand gestures.
+The system supports control of **three independent appliances** using a 3-channel relay module.  
+Each appliance can be controlled individually through gesture-based commands.
 
-### **2. State-Based Channel Selection (FSM Model)**
-- **Swipe Left** → Previous channel  
-- **Swipe Right** → Next channel  
-- Selected channel stays active until changed.
+---
 
-This allows dedicated per-device control without confusion.
+### **2. State-Based Channel Selection (Finite State Machine)**
+
+- **Swipe Right** → Select next channel (1 → 2 → 3 → 1)  
+- **Swipe Left** → Select previous channel (1 → 3 → 2 → 1)  
+
+Once selected, the channel remains active until another left or right gesture is detected.
+
+---
 
 ### **3. Action Gestures**
-- **Swipe Up** → Turn ON active channel  
-- **Swipe Down** → Turn OFF active channel  
+- **Swipe Up** → Turn ON the selected channel  
+- **Swipe Down** → Turn OFF the selected channel  
 
-### **4. Dynamic OLED Feedback**
-The OLED display shows:
-- Current active channel  
-- Status of all channels:  
-  - `CH1: ON/OFF`  
-  - `CH2: ON/OFF`  
-  - `CH3: ON/OFF`  
-- Real-time pointer ( > ) that moves with left/right gestures.
+This separation of *selection* and *action* ensures reliable multi-device control.
 
-### **5. Fully Offline & Low Latency**
+---
+
+### **4. Dynamic OLED Visual Feedback**
+The OLED display continuously shows:
+- Active channel indicator  
+- ON/OFF status of all channels  
+- Instant updates after every valid gesture  
+
+This improves usability and prevents accidental operations.
+
+---
+
+### **5. Offline, Low-Latency Operation**
 - No Wi-Fi  
-- No cloud  
-- No smartphone  
-- Instant response via GPIO relay control
+- No cloud processing  
+- No smartphone dependency  
+- Instant GPIO-based relay switching  
 
-### **6. Hygienic & Accessible**
-Ideal for:
-- Kitchens  
-- Workshops  
-- Wet/dirty environments  
-- Accessibility users  
+The system responds immediately to gestures with minimal delay.
+
+---
+
+### **6. Hygienic and Accessible Interface**
+The touchless interface makes the system suitable for:
+- Hygiene-sensitive environments  
+- Workshops and labs  
+- Wet or dusty conditions  
+- Users with limited motor control  
 
 ---
 
 ## Usage Instructions
 
-1. Power the controller with the MYOSA microcontroller.
-2. Swipe **Left/Right** to choose your appliance.
-3. Swipe **Up** to turn it ON.
-4. Swipe **Down** to turn it OFF.
-5. OLED confirms each action instantly.
+1. Power the system using the MYOSA microcontroller.
+2. Perform **left or right swipe** to select the desired appliance.
+3. Perform **up swipe** to turn the appliance ON.
+4. Perform **down swipe** to turn the appliance OFF.
+5. Observe real-time feedback on the OLED display.
 
 ---
 
 ## Tech Stack
 
-- **Microcontroller** (provided in MYOSA kit)  
+- **Microcontroller** (MYOSA Kit)  
 - **APDS9960 Gesture Sensor**  
-- **SSD1306 OLED Display (0.96”)**  
+- **SSD1306 OLED Display (0.96 inch)**  
 - **3-Channel Relay Module (5V)**  
 - **Arduino IDE (C++ firmware)**  
 - **Adafruit_APDS9960 Library**  
@@ -129,7 +142,7 @@ Ideal for:
 
 ## Requirements / Installation
 
-### **Libraries**
+### **Libraries Required**
 ```bash
 Adafruit_APDS9960
 Adafruit_GFX
