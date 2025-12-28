@@ -121,10 +121,13 @@ The touchless interface makes the system suitable for:
 ## Usage Instructions
 
 1. Power the system using the MYOSA microcontroller.
-2. Perform **swipe** to select the desired appliance.
-3. Perform **1 second hold** to turn the appliance ON.
-4. Perform **1 second hold** again to turn the appliance OFF.
-5. Observe real-time feedback on the OLED display.
+2. On startup, the system automatically performs an **environment calibration** to establish a baseline for reliable gesture detection.
+   - During this calibration phase, **do not place your hand above or near the gesture sensor**.
+   - This allows the sensor to adapt to ambient light and surrounding conditions accurately.
+3. Perform **swipe** to select the desired appliance.
+4. Perform **1 second hold** to turn the appliance ON.
+5. Perform **1 second hold** again to turn the appliance OFF.
+6. Observe real-time feedback on the OLED display.
 
 ---
 
