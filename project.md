@@ -33,7 +33,7 @@ Unlike conventional home automation systems that rely on:
 
 this system works **completely offline** and focuses on **privacy, hygiene, and instant response**.
 
-Using an **APDS9960 gesture sensor**, a **microcontroller**, an **OLED display**, and a **3-channel relay module**, the system converts air gestures into direct electrical control commands without any cloud dependency.
+Using an **APDS9960 gesture sensor**, a **microcontroller**, and an **OLED display**,  the system converts air gestures into direct electrical control commands without any cloud dependency.
 
 ---
 
@@ -65,11 +65,11 @@ Using an **APDS9960 gesture sensor**, a **microcontroller**, an **OLED display**
 
 ---
 
-## Features (Detailed)
+## Features 
 
 ### **1. Multi-Device Gesture Control**
-The system supports control of **three independent appliances** using a 3-channel relay module.  
-Each appliance can be controlled individually through gesture-based commands.
+The system supports control of **three independent devices**.
+Each device can be controlled individually through gesture-based commands.
 
 ---
 
@@ -83,7 +83,8 @@ Once selected, the channel remains active until another gesture is detected.
 ---
 
 ### **3. Action Gestures**
-- **1 second hold** → Turn ON the selected channel   
+- **1 second hold** → Turn ON the selected channel
+-  **1 second hold** → Turn OFF the selected channel 
 
 This separation of *selection* and *action* ensures reliable multi-device control.
 
@@ -111,7 +112,7 @@ The system responds immediately to gestures with minimal delay.
 
 ### **6. Hygienic and Accessible Interface**
 The touchless interface makes the system suitable for:
-- Hygiene-sensitive environments like Operation Theatre
+- Hygiene-sensitive environments like Operation Theatres
 - Workshops and labs  
 - Wet or dusty conditions  
 - Users with limited motor control  
@@ -126,7 +127,7 @@ The touchless interface makes the system suitable for:
    - This allows the sensor to adapt to ambient light and surrounding conditions accurately.
 3. Perform **swipe** to select the desired appliance.
 4. Perform **1 second hold** to turn the appliance ON.
-5. Perform **1 second hold** again to turn the appliance OFF.
+5. Perform **1 second hold again** to turn the appliance OFF.
 6. Observe real-time feedback on the OLED display.
 
 ---
@@ -136,7 +137,6 @@ The touchless interface makes the system suitable for:
 - **Microcontroller** (MYOSA Kit)  
 - **APDS9960 Gesture Sensor**  
 - **SSD1306 OLED Display (0.96 inch)**  
-- **3-Channel Relay Module (5V)**  
 - **Arduino IDE (C++ firmware)**  
 - **Adafruit_APDS9960 Library**  
 
