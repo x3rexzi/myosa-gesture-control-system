@@ -1,5 +1,5 @@
 ---
-publishDate: 2025-12-11
+publishDate: 2025-12-30
 title: Gesture-Based Automation Hub
 excerpt: A touchless 3-channel home automation system powered by APDS9960 gestures.
 image: demo1.jpg
