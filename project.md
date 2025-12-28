@@ -75,16 +75,15 @@ Each appliance can be controlled individually through gesture-based commands.
 
 ### **2. State-Based Channel Selection (Finite State Machine)**
 
-- **Swipe Right** → Select next channel (1 → 2 → 3 → 1)  
-- **Swipe Left** → Select previous channel (1 → 3 → 2 → 1)  
+- **Swipe** → Select next channel (1 → 2 → 3 → 1)
+- **swipe** can be in any direction i.e. up, down, right, left.
 
-Once selected, the channel remains active until another left or right gesture is detected.
+Once selected, the channel remains active until another gesture is detected.
 
 ---
 
 ### **3. Action Gestures**
-- **Swipe Up** → Turn ON the selected channel  
-- **Swipe Down** → Turn OFF the selected channel  
+- **1 second hold** → Turn ON the selected channel   
 
 This separation of *selection* and *action* ensures reliable multi-device control.
 
@@ -112,7 +111,7 @@ The system responds immediately to gestures with minimal delay.
 
 ### **6. Hygienic and Accessible Interface**
 The touchless interface makes the system suitable for:
-- Hygiene-sensitive environments  
+- Hygiene-sensitive environments like Operation Theatre
 - Workshops and labs  
 - Wet or dusty conditions  
 - Users with limited motor control  
@@ -122,9 +121,9 @@ The touchless interface makes the system suitable for:
 ## Usage Instructions
 
 1. Power the system using the MYOSA microcontroller.
-2. Perform **left or right swipe** to select the desired appliance.
-3. Perform **up swipe** to turn the appliance ON.
-4. Perform **down swipe** to turn the appliance OFF.
+2. Perform **swipe** to select the desired appliance.
+3. Perform **1 second hold** to turn the appliance ON.
+4. Perform **1 second hold** again to turn the appliance OFF.
 5. Observe real-time feedback on the OLED display.
 
 ---
