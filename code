@@ -1,0 +1,116 @@
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+// Pins for later connection
+#define LED_1 12
+#define LED_2 14
+#define LED_3 27
+
+Adafruit_SSD1306 display(128, 64, &Wire, -1);
+
+// Logic Variables
+int activeCH = 1;
+bool states[3] = {false, false, false};
+int dynamicBaseline = 170; 
+int sensitivity = 25;      
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(LED_1, OUTPUT);
+  pinMode(LED_2, OUTPUT);
+  pinMode(LED_3, OUTPUT);
+
+  Wire.begin();
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  display.setTextColor(WHITE);
+  
+  // --- v0xA8 HARDWARE FORCE WAKEUP ---
+  writeReg(0x80, 0x0F); // Power + Prox + ALS + Wait ON
+  writeReg(0x8F, 0x0C); // Gain 8X for better range
+  writeReg(0x8E, 0x0F); // Pulse Count
+  
+  display.clearDisplay();
+  display.setCursor(0, 10);
+  display.println("CALIBRATING...");
+  display.println("Keep hands away!");
+  display.display();
+
+  
+  long sum = 0;
+  for(int i=0; i<20; i++) {
+    sum += readProx();
+    delay(50);
+  }
+  dynamicBaseline = sum / 20;
+  
+  display.clearDisplay();
+  display.println("READY!");
+  display.print("Base: "); display.println(dynamicBaseline);
+  display.display();
+  delay(1500);
+  updateScreen();
+}
+
+void writeReg(uint8_t reg, uint8_t val) {
+  Wire.beginTransmission(0x39);
+  Wire.write(reg);
+  Wire.write(val);
+  Wire.endTransmission();
+}
+
+uint8_t readProx() {
+  Wire.beginTransmission(0x39);
+  Wire.write(0x9C);
+  Wire.endTransmission(false);
+  Wire.requestFrom(0x39, 1);
+  return Wire.available() ? Wire.read() : 0;
+}
+
+unsigned long startTime = 0;
+bool handIn = false;
+
+void loop() {
+  uint8_t p = readProx();
+  
+  // Detection Logic 
+  if (p > (dynamicBaseline + sensitivity)) { 
+    if (!handIn) {
+      startTime = millis();
+      handIn = true;
+    }
+  } else {
+    if (handIn) {
+      unsigned long duration = millis() - startTime;
+      
+      // Feedback on Serial for Debugging
+      Serial.print("Hand Out. Duration: "); Serial.println(duration);
+
+      if (duration < 450) {
+        // QUICK WAVE: Next Channel
+        activeCH = (activeCH % 3) + 1;
+      } 
+      else if (duration > 700) {
+        // LONG HOLD: Toggle
+        states[activeCH-1] = !states[activeCH-1];
+        digitalWrite(activeCH==1?LED_1:(activeCH==2?LED_2:LED_3), states[activeCH-1]);
+      }
+      
+      handIn = false;
+      updateScreen();
+    }
+  }
+  delay(30);
+}
+
+void updateScreen() {
+  display.clearDisplay();
+  display.setTextSize(2);
+  for (int i = 1; i <= 3; i++) {
+    display.setCursor(0, (i - 1) * 21);
+    display.print(i == activeCH ? ">" : " ");
+    display.print("CH"); display.print(i); display.print(":");
+    display.print(states[i - 1] ? "ON" : "OFF");
+  }
+  display.display();
+}
