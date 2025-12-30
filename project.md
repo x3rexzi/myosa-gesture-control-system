@@ -43,7 +43,7 @@ Using an **APDS9960 gesture sensor**, a **microcontroller**, and an **OLED displ
 
 <p align="center">
   <img src="/demo1.jpg" width="800"><br/>
-  <i>Gesture detection and channel selection using APDS9960</i>
+  <i>Components used in the project</i>
 </p>
 
 <p align="center">
